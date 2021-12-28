@@ -17,7 +17,7 @@ int def_oblast(double x,vector<double> X) {
 	return oblast;
 }
 
-void phys_right(vector<double> X, vector<double> H, double t, double dt, double& y, double& x, double& vy, double& vx, double oblast) {
+void phys_right(vector<double> X, vector<double> H, double dt, double& y, double& x, double& vy, double& vx, double oblast) {
 	double g = 9.81;
 	double y1;
 	
@@ -33,7 +33,7 @@ void phys_right(vector<double> X, vector<double> H, double t, double dt, double&
 	}
 }
 
-void phys_left(vector<double> X, vector<double> H, double t, double dt, double& y, double& x, double& vy, double& vx, double oblast) {
+void phys_left(vector<double> X, vector<double> H, double dt, double& y, double& x, double& vy, double& vx, double oblast) {
 	double g = 9.81;
 	double y1;
 
