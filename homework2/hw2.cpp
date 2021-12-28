@@ -9,16 +9,12 @@
 using namespace std;
 
 int def_oblast(double x,vector<double> X) {
-	int sector=0;
-	if (x < X.front()) {
-		sector = 0;
-	}
-	 else{
+	int oblast=0;
+	
 		for (int i = 0; i < X.size(); ++i) {
-			if (x >= X[i]) sector = i+1;
+			if (x >= X[i]) oblast = i+1;
 		}
-	}
-	return sector;
+	return oblast;
 }
 
 void phys_right(vector<double> X, vector<double> H, double t, double dt, double& y, double& x, double& vy, double& vx, double oblast) {
@@ -58,7 +54,6 @@ int main(int argc, char** argv)
 	if (argc < 2 || argc > 2) {
 		cout << "аргументов нет или их больше чем мы ожидаем" << endl;
 	} 
-	else{
 	ifstream i_file;
 	i_file.open(argv[1]);
 	int a = 0;
@@ -70,19 +65,18 @@ int main(int argc, char** argv)
 	int oblast=0;
 	vector<double> X;
 	vector<double> H;
-	double t = 0;
 	double dt = 0.0001;
 	string str;
 	while (getline(i_file, str))
 	{
 		if (a == 0)
 		{
-			y = stoi(str);
+			y = stod(str);
 			a = 1;
 		}
 		else if (a==1)
 		{
-            b = str.find(" ");
+           		b = str.find(" ");
 			vx = stod(str.substr(0, b));
 			vy = stod(str.substr(b + 1, str.length()));
 			a = 2;
@@ -90,7 +84,7 @@ int main(int argc, char** argv)
 		else
 		{
 			if(str.length()>2){
-            b = str.find(" ");
+            		b = str.find(" ");
 			X.push_back(stod(str.substr(0, b)));
 			H.push_back(stod(str.substr(b + 1, str.length())));
 			}
@@ -99,11 +93,10 @@ int main(int argc, char** argv)
 	while (y>0)
 	{
 		oblast=def_oblast(x,X);
-		if (vx >= 0) phys_right(X, H, t, dt, y, x, vy, vx, oblast);
-		if (vx < 0) phys_left(X, H, t, dt, y, x, vy, vx, oblast);
+		if (vx >= 0) phys_right(X, H, dt, y, x, vy, vx, oblast);
+		if (vx < 0) phys_left(X, H, dt, y, x, vy, vx, oblast);
 	}
 	oblast=def_oblast(x, X);
 	cout << oblast;
 	return 0;
-}
 }
