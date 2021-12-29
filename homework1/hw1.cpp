@@ -17,13 +17,13 @@ int position(double x0, double y0, double x, double y)
 	}
 }
 
-double take_x(string str) {
+double take_x( const string& str) {
 	int probel = str.find(" ");
 	double x = stoi(str.substr(0, probel));
 	return x;
 }
 
-double take_y(string str) {
+double take_y(const string& str) {
 	int probel = str.find(" ");
 	double y = stoi(str.substr(probel+1, str.length()));
 	return y;
